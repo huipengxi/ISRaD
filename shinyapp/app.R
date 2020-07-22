@@ -22,12 +22,13 @@ ui <- fluidPage(
       fileInput("file1", "Choose .xlsx file",
                 multiple = TRUE,
                 accept = c(".xlsx")),
-      
+
       # Horizontal line ----
       tags$hr(),
       
-      downloadButton('report', "Generate Report")),
-    
+      downloadButton('report', "Generate QA/QC Report")
+    ),
+
     # Main panel for displaying outputs ----
     mainPanel(
       
@@ -37,7 +38,6 @@ ui <- fluidPage(
     )
     
   )
-)
 
 # Define server logic to read selected file ----
 
