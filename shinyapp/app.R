@@ -41,13 +41,26 @@ ui <- fluidPage(
 
 # Define server logic to read selected file ----
 
-server <- function(input, output){
-  file_name <- function() {
-    paste0("QAQC_", gsub("\\.xlsx", ".txt", basename(input$file1$name)))
-  }
-  content <- function(file){
-      QAQC(input$file1)
+server = function(input, output){
+  
+  # output$table <- renderTable({
+  #   datasetInput()
+  # })
+  
+  # output$contents <- renderTable({
+  #   df = read_xlsx(input$file1$datapath, sheet = input$sheet)
+  # })
+  
+  
+  output$report <- downloadHandler(
+    filename = function() {paste0("QAQC_", gsub("\\.xlsx", ".txt", basename(input$file1$name)))},
+    #file.path = paste0("QAQC_", gsub("\\.xlsx", ".txt", basename(input$file1$name))),
+    content = function(file){
+      QAQC(input$file1$datapath, TRUE, file)
+      
     }
+  )
+  
 }
 
 # Run the app ----
